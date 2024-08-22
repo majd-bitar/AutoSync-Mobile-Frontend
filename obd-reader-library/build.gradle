@@ -1,0 +1,55 @@
+apply plugin: 'com.android.library'
+
+ext {
+    bintrayRepo = 'android-obd-reader'
+    bintrayName = 'android-obd-reader'
+
+    publishedGroupId = 'com.Majd'
+    libraryName = 'obd-reader'
+    artifact = 'obd-reader'
+
+    libraryDescription = 'Android OBD-II Reader library that read standard PIDs values (Mode 01)'
+
+    siteUrl = 'https://github.com/Majdb15/android-obd-reader-with-DB/tree/master'
+    gitUrl = 'https://github.com/Majdb15/android-obd-reader-with-DB/tree/master.git'
+
+    libraryVersion = '1.0.1'
+
+    developerId = 'Majd-Bitar'
+    developerName = 'Majd Bitar'
+    developerEmail = 'majdbitar2003@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+android {
+    namespace= "com.majd.obd.reader"
+    compileSdkVersion 28
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.25'
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation ("com.android.volley:volley:1.2.1")
+}
+
+// Place it at the end of the file
+//apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+//apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
