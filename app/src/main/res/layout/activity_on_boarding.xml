@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screens.OnBoardingActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:orientation="vertical"
+        >
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="306dp"
+            android:src="@mipmap/ic_app_logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/onboarding_tv1"
+            android:textSize="40sp"
+            android:layout_gravity="center"
+            android:textColor="@color/primary"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/onboarding_tv2"
+            android:textSize="45sp"
+            android:layout_gravity="center"
+            android:textColor="@color/primary"
+            />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" /> <!-- This adds a responsive gap -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/onboarding_tv3"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/onboarding_tv4"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="80dp" /> <!-- This adds a responsive gap -->
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/get_started"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/onboarding_bt1"
+            style="@style/CustomButtonStyle"
+            />
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
