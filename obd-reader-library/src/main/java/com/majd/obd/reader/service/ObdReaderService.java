@@ -32,6 +32,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.majd.obd.reader.R;
 import com.majd.obd.reader.application.ObdPreferences;
 import com.majd.obd.reader.constants.DefineObdReader;
 import com.majd.obd.reader.enums.ObdProtocols;
@@ -47,9 +48,6 @@ import com.majd.obd.reader.obdCommand.protocol.TimeoutCommand;
 import com.majd.obd.reader.trip.TripRecord;
 import com.majd.obd.reader.utils.L;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -58,14 +56,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
-
-import app.com.android_obd_reader.R;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+
 
 /**
  * <p>
@@ -698,228 +690,5 @@ public class ObdReaderService extends IntentService implements DefineObdReader {
         }
     }
 
-
-    /**
-     * Create the method that gets  data and send it to the database using volley
-     */
-    public void sendCarData(){
-        TripRecord tripRecord = TripRecord.getTripRecode(this);
-        //First , read all data and store it in variables
-        final String Vehicle_Speed = tripRecord.getSpeed() + " km/h";
-        final String Engine_RPM = tripRecord.getEngineRpm();
-        final String Engine_Runtime = tripRecord.getEngineRuntime()+"hh:mm:ss";
-        final String Trouble_Codes = tripRecord.getmFaultCodes();
-        final String Idling_Fuel_Consumption = String.valueOf(tripRecord.getmIdlingFuelConsumption())+" Litre";
-        final String Driving_Fuel_Consumption= String.valueOf(tripRecord.getmDrivingFuelConsumption())+" Litre";
-        final String Driving_Mass_Airflow = String.valueOf(tripRecord.getmDrivingMaf())+" g/s";
-        final String Idle_Mass_Airflow = String.valueOf(tripRecord.getmIdleMaf())+" g/s";
-        final String Fuel_Type = String.valueOf(tripRecord.getFuelType());
-        final String Max_RPM = String.valueOf(tripRecord.getEngineRpmMax());
-        final String Max_Speed= String.valueOf(tripRecord.getSpeedMax())+" Km/h";
-        final String Driving_Duration = String.valueOf(tripRecord.getDrivingDuration())+" minute";
-        final String Idle_Duration = String.valueOf(tripRecord.getIdlingDuration())+" minute";
-        final String Distance_Since_Codes_Cleared = String.valueOf(tripRecord.getmDistanceTraveledAfterCodesCleared())+" Km";
-        final String Intake_Manifold_Pressure = String.valueOf(tripRecord.getmIntakePressure())+" Kpa";
-        final String Air_Intake_Temp = String.valueOf(tripRecord.getmIntakeAirTemp())+" C";
-        final String Fuel_Level = tripRecord.getmFuelLevel()+" %";
-        final String Engine_Coolant_Temp= tripRecord.getmEngineCoolantTemp()+" C";
-        final String Engine_Load = tripRecord.getmEngineLoad()+" %";
-        final String Barometric_Pressure = tripRecord.getmBarometricPressure()+" Kpa";
-        final String Air_Fuel_Ratio = tripRecord.getmAirFuelRatio()+" AFR";
-        final String Absolute_Load = tripRecord.getmAbsLoad()+" %";
-        final String Pending_Trouble_Codes = tripRecord.getmPendingTroubleCode();
-        final String Control_Module_Power_Supply = tripRecord.getmControlModuleVoltage()+" V";
-        final String Location = "dd"; //LEAVE IT EMPTY FOR NOW
-
-       // final String username =LoginActivity.sharedPrefrencesHelper.getUsername();
-
-        //after all data is read and stored in variables , create the volley request with get method and specify the
-        //car_data.php file in the volley
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, getResources().getString(R.string.URL) + "car_data.php",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        rQueue.getCache().clear();
-                        Log.d("error",response);
-                        try {
-                            //System.out.print(response);
-                            JSONObject jsonObject = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
-                            //JSONObject jsonObject = new JSONObject(response);
-                            //Toast.makeText(RegisterActivity.this, "AFTER", Toast.LENGTH_SHORT).show();
-                            if (jsonObject.optString("success").equals("1")) {
-                                //Toast.makeText(Activity., "Registered Successfully! Now Login", Toast.LENGTH_SHORT).show();
-                                //startActivity(new Intent(getBaseContext(), LoginActivity.class));
-                                sendBroadcast(ACTION_CLIENT_DATA_STATUS, "You're all setup now , you may close the app");
-                                //finish();
-                            } else {
-                                //Toast.makeText(RegisterActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-
-                            //Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //Toast.makeText(RegisterActivity.this, error.toString(), Toast.LENGTH_LONG).show();
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                //if(Vehicle_Speed!=null)
-                    params.put("Vehicle_Speed", Vehicle_Speed);
-                //else
-                //    params.put("Vehicle_Speed", "");
-
-                //if(Engine_RPM!=null)
-                    params.put("Engine_RPM",Engine_RPM);
-                //else
-                //    params.put("Engine_RPM","");
-
-                //if(Engine_Runtime!=null)
-                    params.put("Engine_Runtime", Engine_Runtime);
-                //else
-                 //   params.put("Engine_Runtime", "");
-
-                //if(Trouble_Codes!=null)
-                    params.put("Trouble_Codes", Trouble_Codes);
-                //else
-                //    params.put("Trouble_Codes", "");
-
-                //if(Idling_Fuel_Consumption!=null)
-                   params.put("Idling_Fuel_Consumption", Idling_Fuel_Consumption);
-                //else
-                 //   params.put("Idling_Fuel_Consumption", "");
-
-                //if(Driving_Fuel_Consumption!=null)
-                    params.put("Driving_Fuel_Consumption",Driving_Fuel_Consumption);
-                //else
-                  //  params.put("Driving_Fuel_Consumption","");
-
-                //if(Driving_Mass_Airflow!=null)
-                    params.put("Driving_Mass_Airflow", Driving_Mass_Airflow);
-                //else
-                  //  params.put("Driving_Mass_Airflow", "");
-
-                //if(Idle_Mass_Airflow!=null)
-                    params.put("Idle_Mass_Airflow", Idle_Mass_Airflow);
-                //else
-                //    params.put("Idle_Mass_Airflow", "");
-
-                //if(Fuel_Type!=null)
-                    params.put("Fuel_Type",Fuel_Type);
-                //else
-                 //   params.put("Fuel_Type","");
-
-                //if(Max_RPM!=null)
-                    params.put("Max_RPM",Max_RPM);
-               // else
-               //     params.put("Max_RPM","");
-
-                //if(Max_Speed!=null)
-                    params.put("Max_Speed",Max_Speed);
-                //else
-                  //  params.put("Max_Speed","");
-
-                //if(Driving_Duration!=null)
-                    params.put("Driving_Duration",Driving_Duration);
-                //else
-                  //  params.put("Driving_Duration","");
-
-                //if(Idle_Duration!=null)
-                    params.put("Idle_Duration",Idle_Duration);
-                //else
-                  //  params.put("Idle_Duration","");
-
-                //if(Distance_Since_Codes_Cleared!=null)
-                    params.put("Distance_Since_Codes_Cleared",Distance_Since_Codes_Cleared);
-                //else
-                  //  params.put("Distance_Since_Codes_Cleared","");
-
-                //if(Intake_Manifold_Pressure!=null)
-                    params.put("Intake_Manifold_Pressure",Intake_Manifold_Pressure);
-                //else
-                  //  params.put("Intake_Manifold_Pressure","");
-
-                //if(Air_Intake_Temp!=null)
-                    params.put("Air_Intake_Temp",Air_Intake_Temp);
-                //else
-                  //  params.put("Air_Intake_Temp","");
-
-                //if(Fuel_Level!=null)
-                    params.put("Fuel_Level",Fuel_Level);
-                //else
-                  //  params.put("Fuel_Level","");
-
-               // if(Engine_Coolant_Temp!=null)
-                    params.put("Engine_Coolant_Temp",Engine_Coolant_Temp);
-              //  else
-                //    params.put("Engine_Coolant_Temp","");
-
-                //if(Engine_Load!=null)
-                    params.put("Engine_Load",Engine_Load);
-                //else
-                 //   params.put("Engine_Load","");
-
-                //if(Barometric_Pressure!=null)
-                    params.put("Barometric_Pressure",Barometric_Pressure);
-                //else
-                //    params.put("Barometric_Pressure","");
-
-                //if(Air_Fuel_Ratio!=null)
-                    params.put("Air_Fuel_Ratio",Air_Fuel_Ratio);
-                //else
-                  //  params.put("Air_Fuel_Ratio","");
-
-                //if(Absolute_Load!=null)
-                    params.put("Absolute_Load",Absolute_Load);
-                //else
-                  //  params.put("Absolute_Load","");
-
-                //if(Pending_Trouble_Codes!=null)
-                params.put("Pending_Trouble_Codes",Pending_Trouble_Codes);
-                //else
-                  //  params.put("Pending_Trouble_Codes","No Trouble Codes");
-
-                //if(Control_Module_Power_Supply!=null)
-                    params.put("Control_Module_Power_Supply",Control_Module_Power_Supply);
-                //else
-                  //  params.put("Control_Module_Power_Supply","");
-
-                //if(Location!=null)
-                    params.put("Location",Location);
-                //else
-                  //  params.put("Location","");
-                /*
-                if(username!=null)
-                    params.put("username",username);
-                else
-                    params.put("username","");
-
-                 */
-
-                return params;
-            }
-        };
-        rQueue = Volley.newRequestQueue(ObdReaderService.this);
-        rQueue.add(stringRequest);
-        L.e("::::::DATA SENT::::::::::");
-
-       // Intent intent = new Intent(ObdReaderService.this, UserDashboardActivity.class);
-       // intent.putExtra("username", userr);
-       // startActivity(intent);
-    }
-        //now after volley is created , use the function
-        //protected Map<String, String> getParams(){
-        //Map<String, String> params = new HashMap<String, String>();}
-        //params.put("Vehicle_Speed", s);
-        //keep putting all other values and the method is done
-        // call this void method in the method where bluetooth has esnured connection
-        // and started communicating with the device
     }
 
