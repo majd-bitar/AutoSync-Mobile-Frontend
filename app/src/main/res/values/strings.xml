@@ -1,8 +1,25 @@
 <resources>
+
+    <!-- On boarding screen-->
     <string name="app_name">obdii-reader</string>
     <string name="onboarding_tv1">Your Car\'s</string>
     <string name="onboarding_tv2">Best Friend</string>
     <string name="onboarding_tv3">Our AI-powered diagnostic app</string>
     <string name="onboarding_tv4">can help you keep your car in top shape</string>
     <string name="onboarding_bt1">Get Started</string>
+
+    <!-- Sign up screen-->
+    <string name="create_account">Create Account</string>
+    <string name="name">Name</string>
+    <string name="name_placeHolder">John Doe</string>
+    <string name="email">Email</string>
+    <string name="email_placeHolder">JohnDoe@gmail.com</string>
+    <string name="number">Number</string>
+    <string name="number_placeHolder">+961XXXXXXXX</string>
+    <string name="password">Password</string>
+    <string name="password_placeHolder">*************</string>
+    <string name="signup_button">Signup</string>
+    <string name="Already_have_an_account">Already have an account?</string>
+    <string name="login_link">Login</string>
+    
 </resources>
