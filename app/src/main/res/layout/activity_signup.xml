@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_margin="65dp">
+            android:layout_margin="50dp">
 
             <TableLayout
                 android:layout_width="wrap_content"
@@ -50,7 +50,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:hint="@string/name_placeHolder"
-                        android:textColor="@color/primary"
+                        android:textColor="@color/black"
                         style="@style/CustomInputStyle"
                         android:id="@+id/name_ed"
                         />
@@ -72,7 +72,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:hint="@string/email_placeHolder"
-                        android:textColor="@color/primary"
+                        android:textColor="@color/black"
                         style="@style/CustomInputStyle"
                         android:id="@+id/email_ed"
                         />
@@ -94,7 +94,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:hint="@string/number_placeHolder"
-                        android:textColor="@color/primary"
+                        android:textColor="@color/black"
                         style="@style/CustomInputStyle"
                         android:id="@+id/number_ed"/>
                 </TableRow>
@@ -109,13 +109,13 @@
                         android:textColor="@color/primary"/>
                 </TableRow>
                 <TableRow
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <androidx.appcompat.widget.AppCompatEditText
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/password_placeHolder"
-                        android:textColor="@color/primary"
+                        android:textColor="@color/black"
                         style="@style/CustomInputStyle"
                         android:id="@+id/password_ed"/>
                 </TableRow>
@@ -194,7 +194,10 @@
                     android:layout_height="40dp" />
                 <TableRow
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="30dp"
+                    >
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -212,7 +215,7 @@
                         android:textColor="@color/primary"
                         android:fontFamily="@font/inter_regular"
                         android:textSize="17sp"
-                        android:layout_marginEnd="35dp"
+                        android:layout_marginEnd="30dp"
                         android:id="@+id/login_link_text"
                         />
                 </TableRow>
