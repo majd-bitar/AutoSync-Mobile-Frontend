@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.BLUETOOTH_CONNECT},
                     REQUEST_BLUETOOTH_CONNECT_PERMISSION);
+
         } else {
             // Permission is granted, start the service
             startObdReaderService();
