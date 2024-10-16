@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         context.registerReceiver(mObdReaderReceiver, intentFilter, RECEIVER_EXPORTED);
         // Check and request Bluetooth permission
         checkBluetoothPermissionAndStartService();
+
     }
 
     private void checkBluetoothPermissionAndStartService() {
